@@ -3,18 +3,28 @@ import './App.css';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import RecommendedVideo from './RecommendedVideo';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Search from './Search';
 
 function App() {
   return (
     <div className="App">
-      {/* Header */}
       <Header />
-      <div className="app__page">
-        {/* Sidebar */}
-        <Sidebar />
-        {/* Recommended */}
-        <RecommendedVideo />
-      </div>
+
+      <Router>
+        <Switch>
+          <Route path="/search">
+            <Search />
+          </Route>
+          <Route path="/">
+            <div className="app__page">
+              <Sidebar />
+              <RecommendedVideo />
+            </div>
+          </Route>
+        </Switch>
+      </Router>
+      
     </div>
   );
 }
