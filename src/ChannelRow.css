@@ -1,0 +1,9 @@
+.channelRow {
+    display: flex;
+    align-items: center;
+    width: 70%;
+}
+
+.channelRow__text {
+    display: flex;
+}
