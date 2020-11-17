@@ -20,4 +20,4 @@ function ChannelRow({ image, channel, verified, subs, noOfVideos, description })
     )
 }
 
-export default ChannelRow
+export default ChannelRow;
