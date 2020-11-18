@@ -9,9 +9,10 @@ import Search from './Search';
 function App() {
   return (
     <div className="App">
-      <Header />
+      
 
       <Router>
+      <Header />
         <Switch>
           <Route path="/search">
             <div className="app__page">

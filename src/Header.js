@@ -6,7 +6,8 @@ import VideoCallIcon from '@material-ui/icons/VideoCall';
 import AppsIcon from '@material-ui/icons/Apps';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Avatar from '@material-ui/core/Avatar'
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import { Link } from 'react-dom';
 
 function Header() {
 
@@ -16,24 +17,20 @@ function Header() {
         <div className="header">
             <div className="header__left">
                 <MenuIcon />
-                <BrowserRouter>
                 <Link to="/">
                     <img
-                        className="header__logo" 
-                        src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Logo_of_YouTube_%282015-2017%29.svg" 
-                        alt=""
-                    />
+                            className="header__logo" 
+                            src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Logo_of_YouTube_%282015-2017%29.svg" 
+                            alt=""
+                        />
                 </Link>
-                </BrowserRouter>
             </div>
             
             <div className="header__input">
                 <input onChange={(e) => setInputSearch(e.target.value)} value={inputSearch} placeholder="Search" type="text"/>
-                <BrowserRouter>
                     <Link to={`/search/${inputSearch}`}>
                         <SearchIcon className="header__inputButton" />  
                     </Link>
-                </BrowserRouter>
             </div>
 
             <div className="header__icons">
