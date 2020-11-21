@@ -2,6 +2,8 @@ import { Avatar } from '@material-ui/core';
 import React from 'react'
 import './Video.css';
 
+const videoURL = "https://www.youtube.com/watch?v="
+
 function Video({title, image, channelImage, channel, views, timestamp}) {
     return (
         <div className="video">
