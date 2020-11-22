@@ -6,6 +6,7 @@
 .video__thumbnail {
     height: 140px;
     width: 250px;
+    cursor: pointer;
 }
 
 .video__info {

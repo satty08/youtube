@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './RecommendedVideo.css'
 import Video from './Video';
 import axios from 'axios';
-
+import instance from './axios';
 
 
 function RecommendedVideos() {
@@ -13,7 +13,7 @@ function RecommendedVideos() {
 
         async function fetchData() {
             
-            const youtube = await axios.get("https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=30&key=AIzaSyBPlzrRv559Sh5UO-l5Z05KdYz8O6ZzX_g")
+            const youtube = await axios.get(instance)
             setVideos(youtube.data.items)
             return youtube
         }
@@ -33,6 +33,7 @@ function RecommendedVideos() {
                     <Video
                         title={video.snippet.title}
                         timestamp={video.snippet.publishedAt}
+                        videoId={video.id.videoId}
                         views="2.3M"
                         channel={video.snippet.channelTitle}
                         image={video.snippet.thumbnails.high.url}
