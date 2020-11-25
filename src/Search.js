@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Search.css';
 import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
 import ChannelRow from './ChannelRow';
 import VideoRow from './VideoRow';
+import { inputSearch } from './Header';
 
 function Search() {
+
+    const [search, setSearch] = useState('')
+
+    useEffect(() => {
+
+        async function fetchData() {
+            
+            const search = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${inputSearch}&part=snippet&key=AIzaSyBPlzrRv559Sh5UO-l5Z05KdYz8O6ZzX_g`)
+            // setSearch(youtube.data.items)
+            return search
+        }
+
+
+         fetchData()
+
+    },[])
+
+    console.log(search);
+
     return (
         <div className="search">
             <div className="search__filter">

@@ -7,7 +7,6 @@ import AppsIcon from '@material-ui/icons/Apps';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Avatar from '@material-ui/core/Avatar'
 import { Link } from 'react-router-dom';
-// import { Link } from 'react-dom';
 
 function Header() {
 
