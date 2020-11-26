@@ -6,11 +6,29 @@ import VideoCallIcon from '@material-ui/icons/VideoCall';
 import AppsIcon from '@material-ui/icons/Apps';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import Avatar from '@material-ui/core/Avatar'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useStateValue } from './StateProvider';
+import { actionTypes } from './reducer';
 
 function Header() {
 
+    const [{}, dispatch] = useStateValue()
+
     const [inputSearch, setInputSearch] = useState("");
+
+    const history = useHistory();
+
+    const search = e => {
+        e.preventDefault();
+        console.log(inputSearch);
+
+        dispatch({
+            type: actionTypes.SET_SEARCH_TERM,
+            term: inputSearch
+        }) 
+
+        history.push('/search')
+    }
 
     return (
         <div className="header">
@@ -28,7 +46,7 @@ function Header() {
             <div className="header__input">
                 <input onChange={(e) => setInputSearch(e.target.value)} value={inputSearch} placeholder="Search" type="text"/>
                     <Link to={`/search/${inputSearch}`}>
-                        <SearchIcon className="header__inputButton" />  
+                        <SearchIcon onClick={search} className="header__inputButton" />  
                     </Link>
             </div>
 
