@@ -15,7 +15,7 @@ const useSearch = (term) => {
         }
 
 
-         fetchData()
+        fetchData()
 
     },[term])
 
