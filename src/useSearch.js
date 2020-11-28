@@ -9,7 +9,7 @@ const useSearch = (term) => {
 
         async function fetchData() {
             
-            const search = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${term}&part=snippet&key=AIzaSyBPlzrRv559Sh5UO-l5Z05KdYz8O6ZzX_g`)
+            const search = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${term}&maxResults=15&part=snippet&key=AIzaSyBPlzrRv559Sh5UO-l5Z05KdYz8O6ZzX_g`)
             setData(search)
             
         }

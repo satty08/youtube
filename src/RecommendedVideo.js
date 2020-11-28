@@ -23,8 +23,6 @@ function RecommendedVideos() {
 
     },[])
 
-    console.log(videos);
-
     return (
         <div className="recommendedVideo">
             <h1>RecommendedVideos</h1>

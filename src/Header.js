@@ -21,6 +21,8 @@ function Header() {
         e.preventDefault()
 
         console.log(inputSearch);
+
+        setInputSearch(e.target.value)
         
         dispatch({
             type: actionTypes.SET_SEARCH_TERM,
@@ -43,9 +45,9 @@ function Header() {
             </div>
             
             <div className="header__input">
-                <input onChange={e => setInputSearch(e.target.value)} value={inputSearch} placeholder="Search" type="text"/>
+                <input onChange={search} value={inputSearch} placeholder="Search" type="text"/>
                     <Link to={`/search/${inputSearch}`}>
-                        <SearchIcon onClick={search} className="header__inputButton" />  
+                        <SearchIcon className="header__inputButton" />  
                     </Link>
             </div>
 

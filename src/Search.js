@@ -4,19 +4,29 @@ import TuneOutlinedIcon from '@material-ui/icons/TuneOutlined';
 import ChannelRow from './ChannelRow';
 import VideoRow from './VideoRow';
 import { useStateValue } from './StateProvider';
-import useSearch from './useSearch';
+import axios from 'axios';
+// import useSearch from './useSearch';
 
 
 function Search() {
 
     const [{term}, dispatch] = useStateValue();
 
-    // const [search, setSearch] = useState([])
+    const [search, setSearch] = useState([])
 
-    const { data } = useSearch(term)
+    
 
-    console.log(term);
-    console.log(data);
+    useEffect(() => {
+        const setData = async () => {
+            const search = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${term}&maxResults=15&part=snippet&key=AIzaSyBPlzrRv559Sh5UO-l5Z05KdYz8O6ZzX_g`)
+            setSearch(search.data.items)
+            return search
+        }
+
+        setData();
+    }, [])
+
+    console.log(search);
 
     return (
         <div className="search">
@@ -27,78 +37,29 @@ function Search() {
             <hr/>
 
             <ChannelRow 
-                image="https://5.imimg.com/data5/CT/NF/GLADMIN-30040665/vedic-math-classes-500x500.png"
-                channel="Maths Classes"
+                image={search[0].snippet.thumbnails.high.url}
+                channel={search[0].snippet.channelTitle}
                 verified
                 subs="660k"
                 noOfVideos={382}
-                description="The best mathematics lecture"
+                description={search[0].snippet.description}
             />
             <hr/>
-            <VideoRow 
-                image="https://5.imimg.com/data5/CT/NF/GLADMIN-30040665/vedic-math-classes-500x500.png"
-                channel="Maths Classes"
-                verified
-                subs="660k"
-                noOfVideos={382}
-                description="The best mathematics lecture"
-                timestamp="59 seconds ago"
-            />
-            <VideoRow 
-                image="https://5.imimg.com/data5/CT/NF/GLADMIN-30040665/vedic-math-classes-500x500.png"
-                channel="Maths Classes"
-                verified
-                subs="660k"
-                noOfVideos={382}
-                description="The best mathematics lecture"
-                timestamp="59 seconds ago"
-            />
-            <VideoRow 
-                image="https://5.imimg.com/data5/CT/NF/GLADMIN-30040665/vedic-math-classes-500x500.png"
-                channel="Maths Classes"
-                verified
-                subs="660k"
-                noOfVideos={382}
-                description="The best mathematics lecture"
-                timestamp="59 seconds ago"
-            />
-            <VideoRow 
-                image="https://5.imimg.com/data5/CT/NF/GLADMIN-30040665/vedic-math-classes-500x500.png"
-                channel="Maths Classes"
-                verified
-                subs="660k"
-                noOfVideos={382}
-                description="The best mathematics lecture"
-                timestamp="59 seconds ago"
-            />
-            <VideoRow 
-                image="https://5.imimg.com/data5/CT/NF/GLADMIN-30040665/vedic-math-classes-500x500.png"
-                channel="Maths Classes"
-                verified
-                subs="660k"
-                noOfVideos={382}
-                description="The best mathematics lecture"
-                timestamp="59 seconds ago"
-            />
-            <VideoRow 
-                image="https://5.imimg.com/data5/CT/NF/GLADMIN-30040665/vedic-math-classes-500x500.png"
-                channel="Maths Classes"
-                verified
-                subs="660k"
-                noOfVideos={382}
-                description="The best mathematics lecture"
-                timestamp="59 seconds ago"
-            />
-            <VideoRow 
-                image="https://5.imimg.com/data5/CT/NF/GLADMIN-30040665/vedic-math-classes-500x500.png"
-                channel="Maths Classes"
-                verified
-                subs="660k"
-                noOfVideos={382}
-                description="The best mathematics lecture"
-                timestamp="59 seconds ago"
-            />
-        </div>
+
+            {search.map(s => (
+                    <VideoRow 
+                        image={s.snippet.thumbnails.high.url}
+                        channel={s.snippet.channelTitle}
+                        verified
+                        timestamp={s.snippet.publishTime}
+                        description={s.snippet.description}
+                        subs="660k"
+                        noOfVideos={382}
+                    />
+            ))
+            }
+
+            </div>
     )
 }
 
