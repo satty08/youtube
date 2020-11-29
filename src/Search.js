@@ -5,28 +5,27 @@ import ChannelRow from './ChannelRow';
 import VideoRow from './VideoRow';
 import { useStateValue } from './StateProvider';
 import axios from 'axios';
-// import useSearch from './useSearch';
 
 
 function Search() {
 
     const [{term}, dispatch] = useStateValue();
 
-    const [search, setSearch] = useState([])
+    const [searchList, setSearchList] = useState([])
 
     
 
     useEffect(() => {
         const setData = async () => {
-            const search = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${term}&maxResults=15&part=snippet&key=AIzaSyBPlzrRv559Sh5UO-l5Z05KdYz8O6ZzX_g`)
-            setSearch(search.data.items)
-            return search
+            const searchTerm = await axios.get(`https://www.googleapis.com/youtube/v3/search?q=${term}&maxResults=15&part=snippet&key=AIzaSyBPlzrRv559Sh5UO-l5Z05KdYz8O6ZzX_g`)
+            setSearchList(searchTerm.data.items)
+            return searchTerm
         }
 
         setData();
     }, [])
 
-    console.log(search);
+    console.log(searchList);
 
     return (
         <div className="search">
@@ -36,21 +35,21 @@ function Search() {
             </div>
             <hr/>
 
-            <ChannelRow 
-                image={search[0].snippet.thumbnails.high.url}
-                channel={search[0].snippet.channelTitle}
+            {/* <ChannelRow 
+                image={searchList[1].snippet.thumbnails.high.url| ''}
+                channel={searchList[1].snippet.channelTitle|''}
                 verified
                 subs="660k"
                 noOfVideos={382}
-                description={search[0].snippet.description}
-            />
+                description={searchList[1].snippet.description|''}
+            /> */}
             <hr/>
 
-            {search.map(s => (
+            {searchList.map(s => (
                     <VideoRow 
                         image={s.snippet.thumbnails.high.url}
+                        title={s.snippet.title}
                         channel={s.snippet.channelTitle}
-                        verified
                         timestamp={s.snippet.publishTime}
                         description={s.snippet.description}
                         subs="660k"
